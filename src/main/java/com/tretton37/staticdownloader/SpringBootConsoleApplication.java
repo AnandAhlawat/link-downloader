@@ -58,7 +58,7 @@ public class SpringBootConsoleApplication implements CommandLineRunner {
 
         linkReaderFactory.getReader(linkArgs).deepSearchSubLinks(linkArgs, Constants.urlRegex, deepLinks);
         deepLinks.stream().forEach(link -> {
-                    log.info("starting download , file : {}", link);
+                    log.info("starting download , link : {}", link);
                     utils.generateAbsoluteFilePath(link, fileMeta);
                     directoryService.setBaseDirectory(baseDir);
                     directoryService.createDirectory(fileMeta[0]);
