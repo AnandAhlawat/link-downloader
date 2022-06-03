@@ -1,9 +1,10 @@
 package com.tretton37.staticdownloader.link.impl;
 
 import com.tretton37.staticdownloader.link.LinkReader;
-import lombok.AllArgsConstructor;
+import com.tretton37.staticdownloader.util.Utils;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.io.BufferedReader;
@@ -16,12 +17,14 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import static com.tretton37.staticdownloader.util.Constants.*;
-import static com.tretton37.staticdownloader.util.LinkFetcherUtil.getFileExtension;
 
 @Slf4j
 @Service
 @Data
 public class HttpLinkReader implements LinkReader {
+
+    @Autowired
+    Utils utils;
 
     private String baseLink;
 
@@ -77,7 +80,7 @@ public class HttpLinkReader implements LinkReader {
                     link = htmlLine.substring(matcher.start() + 6, matcher.end());
                     link = link.startsWith(HTTP_CONST) ? link : baseLink + link;
                     matchSubLinks.add(link);
-                    if (!matchSubLinks.contains(link) && (getFileExtension(link).equals(HTML_CONST) || getFileExtension(link).equals(BLANK_CONST)))
+                    if (!matchSubLinks.contains(link) && (utils.getFileExtension(link).equals(HTML_CONST) || utils.getFileExtension(link).equals(BLANK_CONST)))
                         deepSearchSubLinks(link, regex, matchSubLinks);
                 }
             }
