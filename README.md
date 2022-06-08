@@ -15,7 +15,7 @@ There are four major components to the application
 
 ## List of Stories
 
-- Requires comprehension
+- Requirement understanding 
 - POC on console running application
 - A recursive module for downloading files from links.
 - Save the downloaded files to your computer's file system.
